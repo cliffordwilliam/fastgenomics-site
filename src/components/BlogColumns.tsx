@@ -6,6 +6,7 @@ import { ArrowUpDown, Pencil } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export const BlogsColumns: ColumnDef<Blog>[] = [
   {
@@ -51,10 +52,12 @@ export const BlogsColumns: ColumnDef<Blog>[] = [
     cell: ({ row }) => {
       const { id } = row.original;
       return (
-        <Button variant={"ghost"}>
-          <Pencil className="mr-2 h-4 w-4" />
-          <span>Edit</span>
-        </Button>
+        <Link href={`/admin/blogs/${id}`}>
+          <Button variant={"ghost"}>
+            <Pencil className="mr-2 h-4 w-4" />
+            <span>Edit</span>
+          </Button>
+        </Link>
       );
     },
   },

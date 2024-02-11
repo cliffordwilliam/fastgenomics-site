@@ -1,11 +1,11 @@
 "use client";
-import { Book, Cog, Compass, Home } from "lucide-react";
+import { Book, Cog, Home, LibraryBig } from "lucide-react";
 import { usePathname } from "next/navigation";
 import SidebarLinkItem from "./SidebarLinkItem";
 
 const regularLinks = [
   { name: "Homepage", href: "/", Icon: Home },
-  { name: "Search", href: "/search", Icon: Compass },
+  { name: "Search Blogs", href: "/searchBlogs", Icon: LibraryBig },
 ];
 const adminLinks = [
   { name: "Blogs", href: "/admin/blogs", Icon: Book },
