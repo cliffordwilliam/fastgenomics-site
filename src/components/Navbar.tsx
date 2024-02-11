@@ -13,7 +13,7 @@ const Navbar = () => {
         {/* mode button */}
         <NavbarLinksList />
         {/* user button */}
-        <UserButton afterSignOutUrl="/" />
+        <UserButton afterSignOutUrl="/sign-in" />
       </nav>
     </>
   );
