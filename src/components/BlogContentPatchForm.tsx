@@ -1,8 +1,5 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -14,35 +11,40 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import Link from "next/link";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Blog } from "@prisma/client";
 import axios from "axios";
-import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { z } from "zod";
+import Tiptap from "./Tiptap";
 
 const formSchema = z.object({
-  title: z.string().min(2, {
-    message: "Title must be at least 2 characters.",
+  content: z.string().min(2, {
+    message: "Content must be at least 2 characters.",
   }),
 });
 
-const Page = () => {
+const BlogContentPatchForm = ({ blog }: { blog: Blog }) => {
   const route = useRouter();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    mode: "onChange",
     defaultValues: {
-      title: "",
+      content: blog.content || "",
     },
   });
   const { isSubmitting, isValid } = form.formState;
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const res = await axios.post("/api/blogs", values);
-      toast.success("Blog successfully added.");
-      route.push(`/admin/blogs/${res.data.id}`);
+      const res = await axios.patch(`/api/blogs/${blog.id}`, values);
+      toast.success("Blog content successfully updated.");
+      route.refresh();
     } catch (error) {
-      toast.error("Failed to add blog, try again later.");
+      toast.error("Failed to update blog content, try again later.");
     }
   }
   return (
@@ -51,34 +53,25 @@ const Page = () => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
-            name="title"
+            name="content"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Title</FormLabel>
+                <FormLabel>content</FormLabel>
                 <FormControl>
-                  <Input
-                    disabled={isSubmitting}
-                    placeholder="e.g. 'Prisma is amazing'"
-                    {...field}
-                  />
+                  <Tiptap content={field.value} onChange={field.onChange} />
                 </FormControl>
-                <FormDescription>This is your blog title.</FormDescription>
+                <FormDescription>This is your blog content.</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <div className="flex gap-x-2">
-            <Button disabled={isSubmitting || !isValid} type="submit">
-              Submit
-            </Button>
-            <Link href={"/admin/blogs"}>
-              <Button>Cancel</Button>
-            </Link>
-          </div>
+          <Button disabled={isSubmitting || !isValid} type="submit">
+            Update
+          </Button>
         </form>
       </Form>
     </div>
   );
 };
 
-export default Page;
+export default BlogContentPatchForm;

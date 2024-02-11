@@ -1,8 +1,5 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -14,10 +11,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import Link from "next/link";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Blog } from "@prisma/client";
 import axios from "axios";
-import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { z } from "zod";
 
 const formSchema = z.object({
   title: z.string().min(2, {
@@ -25,24 +25,24 @@ const formSchema = z.object({
   }),
 });
 
-const Page = () => {
+const BlogTitlePatchForm = ({ blog }: { blog: Blog }) => {
   const route = useRouter();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
+      title: blog.title,
     },
   });
   const { isSubmitting, isValid } = form.formState;
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const res = await axios.post("/api/blogs", values);
-      toast.success("Blog successfully added.");
-      route.push(`/admin/blogs/${res.data.id}`);
+      const res = await axios.patch(`/api/blogs/${blog.id}`, values);
+      toast.success("Blog title successfully updated.");
+      route.refresh();
     } catch (error) {
-      toast.error("Failed to add blog, try again later.");
+      toast.error("Failed to update blog title, try again later.");
     }
   }
   return (
@@ -67,18 +67,13 @@ const Page = () => {
               </FormItem>
             )}
           />
-          <div className="flex gap-x-2">
-            <Button disabled={isSubmitting || !isValid} type="submit">
-              Submit
-            </Button>
-            <Link href={"/admin/blogs"}>
-              <Button>Cancel</Button>
-            </Link>
-          </div>
+          <Button disabled={isSubmitting || !isValid} type="submit">
+            Update
+          </Button>
         </form>
       </Form>
     </div>
   );
 };
 
-export default Page;
+export default BlogTitlePatchForm;

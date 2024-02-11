@@ -6,6 +6,11 @@ body,
 :root {
   height: 100%;
 }
+.tiptap {
+  border: 2px solid black;
+  padding: 5px;
+  border-radius: 5px;
+}
 @layer base {
   :root {
     --background: 0 0% 100%;
