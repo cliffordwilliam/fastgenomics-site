@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 
 const Page = async ({ params }: { params: { searchBlogId: string } }) => {
   const { userId } = await auth();
-  if (!userId || !IsUserAdmin(userId)) {
+  if (!userId) {
     redirect("/sign-in");
   }
   const blog = await db.blog.findUnique({ where: { id: params.searchBlogId } });
