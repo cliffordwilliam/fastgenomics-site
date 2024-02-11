@@ -23,3 +23,23 @@ export async function PATCH(
     return new NextResponse("Internal error", { status: 500 });
   }
 }
+export async function DELETE(
+  req: Request,
+  { params }: { params: { blogId: string } }
+) {
+  try {
+    const { userId } = auth();
+    if (!userId || !IsUserAdmin(userId)) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+    const blog = await db.blog.findUnique({ where: { id: params.blogId } });
+    if (!blog) {
+      return new NextResponse("Not found", { status: 404 });
+    }
+    const deletedBlog = await db.blog.delete({ where: { id: params.blogId } });
+    return NextResponse.json(deletedBlog);
+  } catch (error) {
+    console.log("BLOG_ID_DELETE", error);
+    return new NextResponse("Internal error", { status: 500 });
+  }
+}

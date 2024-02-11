@@ -39,7 +39,8 @@ const BlogImageUrlPatchForm = ({ blog }: { blog: Blog }) => {
     }
   }
   return (
-    <div className="p-6">
+    <div className="mt-2">
+      <h2 className="text-xl">Edit featured image</h2>
       {!blog.imageUrl && (
         <div className="flex items-center justify-center h-60 bg-slate-200 rounded-md">
           <ImageIcon className="h-10 w-10 text-slate-500" />
