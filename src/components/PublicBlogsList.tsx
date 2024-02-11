@@ -7,14 +7,9 @@ const PublicBlogsList = ({ blogs }: { blogs: Blog[] }) => {
   return (
     <>
       <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4">
-        <div>
-          {publishedBlogs.map((blog) => (
-            <BlogCard
-              key={blog.id}
-              blog={blog}
-            />
-          ))}
-        </div>
+        {publishedBlogs.map((blog) => (
+          <BlogCard key={blog.id} blog={blog} />
+        ))}
         {publishedBlogs.length === 0 && (
           <div className="text-center text-sm text-muted-foreground mt-10">
             No blogs found
