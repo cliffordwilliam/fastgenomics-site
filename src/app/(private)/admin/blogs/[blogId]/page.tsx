@@ -1,4 +1,5 @@
 import BlogContentPatchForm from "@/components/BlogContentPatchForm";
+import BlogImageUrlPatchForm from "@/components/BlogImageUrlPatchForm";
 import BlogTitlePatchForm from "@/components/BlogTitlePatch";
 import IsUserAdmin from "@/lib/IsUserAdmin";
 import { db } from "@/lib/db";
@@ -16,6 +17,7 @@ const Page = async ({ params }: { params: { blogId: string } }) => {
   }
   return (
     <>
+      <BlogImageUrlPatchForm blog={blog} />
       <BlogTitlePatchForm blog={blog} />
       <BlogContentPatchForm blog={blog} />
     </>
