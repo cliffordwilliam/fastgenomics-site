@@ -6,6 +6,8 @@ import { Shield, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { UserButton, useAuth } from "@clerk/nextjs";
 import IsUserAdmin from "@/lib/IsUserAdmin";
+import BlogPublicSearchInput from "./BlogPublicSearchInput";
+import ServicePublicSearchInput from "./ServicePublicSearchInput";
 
 const NavbarLinksList = () => {
   const { userId } = useAuth();
@@ -15,8 +17,20 @@ const NavbarLinksList = () => {
   const onClick = () => {
     router.push(isAdmin ? "/" : "admin/blogs");
   };
+  const isSearchBlogsPage = pathname === "/searchBlogs";
+  const isSearchServicesPage = pathname === "/searchServices";
   return (
     <>
+      {isSearchBlogsPage && (
+        <div className="hidden md:block">
+          <BlogPublicSearchInput />
+        </div>
+      )}
+      {isSearchServicesPage && (
+        <div className="hidden md:block">
+          <ServicePublicSearchInput />
+        </div>
+      )}
       {IsUserAdmin(userId) && (
         <div className="ml-auto">
           {isAdmin && (

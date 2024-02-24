@@ -19,3 +19,24 @@ model Blog {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+
+model Service {
+  id          String   @id @default(uuid())
+  title       String
+  imageUrl    String?  @db.Text
+  content     String?  @db.Text
+  isPublished Boolean? @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Publication {
+  id          String    @id @default(uuid())
+  title       String
+  author      String?
+  year        DateTime?
+  link        String?
+  isPublished Boolean?  @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}

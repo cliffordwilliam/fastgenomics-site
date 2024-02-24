@@ -13,6 +13,7 @@ import {
   Heading4,
   Heading5,
   Heading6,
+  ImageIcon,
 } from "lucide-react";
 import { Toggle } from "./ui/toggle";
 
@@ -20,6 +21,13 @@ const TiptapToolBar = ({ editor }: { editor: Editor | null }) => {
   if (!editor) {
     return;
   }
+  const insertImage = () => {
+    const url = window.prompt("Enter the URL of the image:");
+    if (url) {
+      editor.chain().focus().setImage({ src: url }).run();
+    }
+  };
+
   return (
     <>
       <div>
@@ -121,6 +129,10 @@ const TiptapToolBar = ({ editor }: { editor: Editor | null }) => {
           }}
         >
           <ListOrdered className="h-4 w-4" />
+        </Toggle>
+
+        <Toggle size={"sm"} onPressedChange={insertImage}>
+          <ImageIcon className="h-4 w-4" />
         </Toggle>
       </div>
     </>

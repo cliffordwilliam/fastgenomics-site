@@ -1,15 +1,17 @@
 "use client";
-import { Book, Cog, Home, LibraryBig } from "lucide-react";
+import { Book, Cog, Home, LibraryBig, File } from "lucide-react";
 import { usePathname } from "next/navigation";
 import SidebarLinkItem from "./SidebarLinkItem";
 
 const regularLinks = [
   { name: "Homepage", href: "/", Icon: Home },
-  { name: "Search Blogs", href: "/searchBlogs", Icon: LibraryBig },
+  { name: "Blogs", href: "/searchBlogs", Icon: LibraryBig },
+  { name: "Services", href: "/searchServices", Icon: Cog },
 ];
 const adminLinks = [
   { name: "Blogs", href: "/admin/blogs", Icon: Book },
   { name: "Services", href: "/admin/services", Icon: Cog },
+  { name: "Publications", href: "/admin/publications", Icon: File },
 ];
 const SidebarLinksList = () => {
   const pathname = usePathname();
