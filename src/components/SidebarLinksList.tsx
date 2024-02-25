@@ -7,6 +7,7 @@ const regularLinks = [
   { name: "Homepage", href: "/", Icon: Home },
   { name: "Blogs", href: "/searchBlogs", Icon: LibraryBig },
   { name: "Services", href: "/searchServices", Icon: Cog },
+  { name: "Publications", href: "/searchPublications", Icon: File },
 ];
 const adminLinks = [
   { name: "Blogs", href: "/admin/blogs", Icon: Book },

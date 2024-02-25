@@ -8,6 +8,7 @@ import { UserButton, useAuth } from "@clerk/nextjs";
 import IsUserAdmin from "@/lib/IsUserAdmin";
 import BlogPublicSearchInput from "./BlogPublicSearchInput";
 import ServicePublicSearchInput from "./ServicePublicSearchInput";
+import PublicationPublicSearchInput from "./PublicationPublicSearchInput";
 
 const NavbarLinksList = () => {
   const { userId } = useAuth();
@@ -19,6 +20,7 @@ const NavbarLinksList = () => {
   };
   const isSearchBlogsPage = pathname === "/searchBlogs";
   const isSearchServicesPage = pathname === "/searchServices";
+  const isSearchPublicationsPage = pathname === "/searchPublications";
   return (
     <>
       {isSearchBlogsPage && (
@@ -29,6 +31,11 @@ const NavbarLinksList = () => {
       {isSearchServicesPage && (
         <div className="hidden md:block">
           <ServicePublicSearchInput />
+        </div>
+      )}
+      {isSearchPublicationsPage && (
+        <div className="hidden md:block">
+          <PublicationPublicSearchInput />
         </div>
       )}
       {IsUserAdmin(userId) && (
