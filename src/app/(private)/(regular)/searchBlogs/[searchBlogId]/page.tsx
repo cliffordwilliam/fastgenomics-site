@@ -15,7 +15,17 @@ const Page = async ({ params }: { params: { searchBlogId: string } }) => {
   }
   return (
     <>
-      <div className="p-6 prose">
+      <section className="bg-gradient-to-r from-cyan-50 to-cyan-300">
+        <div className="p-4 container mx-auto">
+          <h2 className="text-black font-bold text-4xl underline underline-offset-8 decoration-blue-700">
+            {blog.title}
+          </h2>
+          <p className="mt-2">
+            Date published: {blog.createdAt.toDateString()}
+          </p>
+        </div>
+      </section>
+      <div className="p-4 container mx-auto prose">
         <Image
           width={300}
           height={300}

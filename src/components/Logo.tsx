@@ -6,7 +6,7 @@ const Logo = () => {
       width={120}
       height={120}
       alt="logo"
-      src={"/next.svg"}
+      src={"/logo.svg"}
       priority
       className="w-[120] h-[120]"
     />

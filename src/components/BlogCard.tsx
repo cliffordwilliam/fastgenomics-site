@@ -16,9 +16,10 @@ const BlogCard = ({ blog }: { blog: Blog }) => {
             />
           </div>
           <div className="flex flex-col pt-2">
-            <h2 className="text-lg md:text-base font-medium group-hover:text-sky-700 line-clamp-2">
+            <h2 className="text-lg font-medium group-hover:text-sky-700 line-clamp-2">
               {blog.title}
             </h2>
+            <span className="group-hover:text-sky-700">Read more</span>
           </div>
         </div>
       </Link>
