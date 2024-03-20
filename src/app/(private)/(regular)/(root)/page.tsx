@@ -63,7 +63,7 @@ const Page = async () => {
             </h2>
             <p className="mt-4">
               Working closely with our client to analyze sequencing data of
-              microbial genomes, ensuring client's thorough comprehension on
+              microbial genomes, ensuring client&aposs thorough comprehension on
               their data whether for research or other purposes through data
               visualization and storytelling. We provice publication-quality
               data visualizations
